@@ -18,7 +18,10 @@ public class Main {
             System.out.println("1. Create a Student ");
             System.out.println("2. Create a Teacher ");
             System.out.println("3. Create a Subject ");
-            System.out.println("4. Exit ");
+            System.out.println("4. Print Students ");
+            System.out.println("5. Print Teachers ");
+            System.out.println("6. Print Subjects ");
+            System.out.println("7. Exit ");
 
             option = sc.nextInt();
 
@@ -36,10 +39,19 @@ public class Main {
                     subjectList.add(subject);
                     break;
                 case 4:
+                    printStudentList(studentList);
+                    break;
+                case 5:
+                    printTeacherList(teacherList);
+                    break;
+                case 6:
+                    printSubjectList(subjectList);
+                    break;
+                case 7:
                     System.out.println("***** Exit System *******");
                     break;
             }
-        } while(option != 4);
+        } while(option != 7);
     }
 
     public static Student createStudent() {
@@ -114,5 +126,28 @@ public class Main {
         }
 
         return new Subject(name, teacher, students);
+    }
+    public static void printSubjectList(List<Subject> subjectList) {
+        int index = 1;
+        for (Subject subject : subjectList) {
+            System.out.println("Subject: " + subject.getName().toUpperCase());
+            Teacher teacher = subject.getTeacher();
+            System.out.print(" Teacher: " + teacher.getName().toUpperCase() + " "
+                                + teacher.getLastName().toUpperCase() + " -Age: "
+                                + teacher.getAge() + " -Teacher Code: "
+                                + teacher.getTeacherCode() + " -Year of Experience: "
+                                + teacher.getYearsOfExperience());
+            System.out.println("Student/s List: ");
+            int i = 1;
+            for(Student student: subject.getStudentList()){
+                System.out.println(" " + i + ". " + student.getName().toUpperCase()
+                        + " " + student.getLastName().toUpperCase() + " -Age: "
+                        + student.getAge() + " -Student Code: "
+                        + student.getStudentCode() + " -Number of Semesters: "
+                        + student.getNoOfSemester());
+                i=i+1;
+            }
+            index = index +1;
+        }
     }
 }
